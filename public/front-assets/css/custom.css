@@ -1,0 +1,82 @@
+/* General styles for the footer */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.footer-links li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.footer-links li a img.footerIcon, .footer-card p img.footerIcon {
+    margin-right: 10px; /* Space between image and text */
+    width: auto;
+    height: 25px; /* Adjust this height to ensure uniformity */
+}
+
+.footer-links li a:hover, .footer-links li a:hover img {
+    text-decoration: none; /* No underline on hover */
+}
+
+/* Ensure icons and text are aligned and spaced properly */
+.footer-card p {
+    color: #fff; /* Ensure footer text is white or another suitable color */
+}
+
+.footer-card p .fa, .footer-card p img.footerIcon {
+    margin-right: 10px; /* Space between icon/image and text */
+}
+
+.headLogo {
+    width: 45%;
+    height: 53px;
+}
+
+/* Media query for screens smaller than 768px (typical mobile devices) */
+@media (max-width: 768px) {
+    .headLogo {
+        width: 70%; /* Adjust the width as needed for smaller screens */
+        max-width: none; /* Reset max-width if necessary */
+        height: 24px;
+    }
+}
+
+/* Background color and padding for the footer */
+.bg-dark {
+    background-color: #343a40 !important; /* Dark background color */
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.pt-3 {
+    padding-top: 1rem !important;
+}
+
+.pb-5 {
+    padding-bottom: 3rem !important;
+}
+
+.icon {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Copyright area at the bottom */
+.copyright-area {
+    background-color: #222;
+    padding: 10px 0;
+}
+
+.copy-right {
+    color: #fff; /* Copyright text color */
+}

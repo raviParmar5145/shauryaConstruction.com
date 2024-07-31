@@ -2,7 +2,11 @@
 <html class="no-js" lang="en_AU" />
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Shopping Project</title>
+	<title>Book Swap</title>
+
+	<!-- Favicon -->
+	<link rel="icon" href="{{ asset('admin-assets/img/AdminDeshLogo.jpg') }}" type="image/x-icon">
+	
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
 
@@ -44,6 +48,18 @@
 	<!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
 
+	<!-- summernote box style -->
+	<link rel="stylesheet" href="{{ asset('admin-assets/plugins/summernote/summernote.min.css') }}">
+	<!-- Dropzone CSS -->
+	<link rel="stylesheet" href="{{ asset('admin-assets/plugins/dropzone/min/dropzone.min.css') }}">
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="{{ asset('admin-assets/plugins/select2/css/select2.min.css') }}">
+
+	<!-- Date timepicker CSS -->
+	<link rel="stylesheet" href="{{ asset('admin-assets/css/datetimepicker.css') }}">
+
+	<link rel="stylesheet" href="{{ asset('front-assets/css/custom.css') }}">
+
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body data-instant-intensity="mousedown">
@@ -53,20 +69,30 @@
 		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
 			<div class="col-lg-4 logo">
 				<a href="{{ route('front.shop') }}" class="text-decoration-none">
-					<span class="h1 text-uppercase text-primary bg-secondary px-2">Sumay</span>
-					<span class="h1 text-uppercase text-primary bg-primary px-2 ml-n1">SHOP</span>
-				</a>
+					<span class="h4 text-uppercase text-primary bg-secondary px-2">Shaurya</span>
+					<span class="h4 text-uppercase text-primary bg-primary log px-2 ml-n1">Construction
+						{{-- <img class="headLogo" src="{{ asset('front-assets/images/web-logo.png') }}" alt="" /> --}}
+					</a>
 			</div>
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
 				@if (Auth::check())
+
+				{{-- {{ Auth::user()->role }}
+				{{ auth()->user()->role }} --}}
+				@if (auth()->check() && auth()->user()->role == 0)
+                    <a href="{{ route('seller.index') }}" class="nav-link text-warning">Product List</a>
+                    {{-- <a href="#" class="nav-link text-success">Books List</a> --}}
+                @endif
+
 					<a href="{{ route('account.profile') }}" class="nav-link text-dark">My Account</a>
 				@else
 					<a href="{{ route('account.login') }}" class="nav-link text-dark">Login/Register</a>
+					
 				@endif
-				<form action="{{ route('front.shop') }}" method="get">					
+				<form action="{{ route('front.shop')}}" method="get">					
 					<div class="input-group">
-						<input value="{{ Request::get('search') }}" type="text" placeholder="Search For Products" class="form-control" name="search">
-						<button  type="submit" class="input-group-text">
+						<input value="{{ Request::get('search') }}" type="text" placeholder="Search For Books" class="form-control" name="search">
+						<button type="submit" class="input-group-text">
 							<i class="fa fa-search"></i>
 					  	</button>
 					</div>
@@ -80,8 +106,9 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
-				<span class="h2 text-uppercase text-primary bg-dark">Sumay</span>
-				<span class="h2 text-uppercase text-white px-2">SHOP</span>
+				{{-- <span class="h2 text-uppercase text-primary bg-dark">Book</span>
+				<span class="h2 text-uppercase text-white px-2">Swap<span> --}}
+					<img class="headLogo" src="{{ asset('front-assets/images/web-logo.png') }}" alt="" />
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
@@ -127,56 +154,70 @@
 
 
 <footer class="bg-dark mt-5">
-	<div class="container pb-5 pt-3">
-		<div class="row">
-			<div class="col-md-4">
+    <div class="container pb-5 pt-3">
+        <div class="row">
+
+			<div class="col-md-3">
 				<div class="footer-card">
-					<h3>Get In Touch</h3>
-					<p>Titanium City Center Corporate Offices,
-						<br> D-903, 100 Feet Anand Nagar Rd, <br>
-						Jodhpur Village, Ahmedabad, <br>
-						Gujarat 380015
+					<h3>Shaurya</h3>
+					<p> "shauryaConstruction" is a platform designed for book enthusiasts to exchange and share their favorite reads. It facilitates book swapping and provides a community for discussing and discovering new books.
 					</p>
 				</div>
 			</div>
 
 			<div class="col-md-4">
 				<div class="footer-card">
-					<h3>Important Links</h3>
-					<ul>
-						<li><a href="#" title="About">About</a></li>
-						<li><a href="#" title="Contact Us">Contact Us</a></li>						
-						<li><a href="#" title="Privacy">Privacy</a></li>
-						<li><a href="#" title="Privacy">Terms & Conditions</a></li>
-						<li><a href="#" title="Privacy">Refund Policy</a></li>
-					</ul>
+					<h3>Get In Touch</h3>
+					<p>
+						<a href="tel:+917874728723"><img class="footerIcon" src="{{ asset('front-assets/footerImage/mobile.png') }}" alt="" /> +91 7874728723 </a>
+						<a href="tel:+917283931539"><img class="footerIcon" src="{{ asset('front-assets/footerImage/mobile.png') }}" alt="" /> +91 7283931539 </a>
+						<a href="mailto:customer@shauryaConstruction.com"><img class="footerIcon" src="{{ asset('front-assets/footerImage/Mail2.png') }}" alt="" /> customer@shauryaConstruction.com </a>
+						<img class="footerIcon" src="{{ asset('front-assets/footerImage/Address.png') }}" alt="" /> 6/7 I, Shivshakti Tenament, <br>Shanti-nagar, Chitra.
+						Landmark: Behind Press Quatar; Bhavnager, Gujarat.
+					</p>
 				</div>
 			</div>
-
-			<div class="col-md-4">
-				<div class="footer-card">
-					<h3>My Account</h3>
-					<ul>
-						<li><a href="{{ route('account.login') }}" title="Sell">Login</a></li>
-						<li><a href="{{ route('account.register') }}" title="Advertise">Register</a></li>
-						<li><a href="{{ route('account.orders') }}" title="Contact Us">My Orders</a></li>						
-					</ul>
-				</div>
-			</div>			
-		</div>
-	</div>
-	<div class="copyright-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-12 mt-3">
-					<div class="copy-right text-center">
-						<p>Copyright © 2024 Sumay.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+			
+            
+            <div class="col-md-3">
+                <div class="footer-card">
+                    <h3>Useful Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="{{ route('about') }}" title="About"><img class="footerIcon" src="{{ asset('front-assets/footerImage/Aboutus.png') }}" alt="" />About</a></li>
+                        <li><a href="{{ route('contact') }}" title="Contact Us"><img class="footerIcon" src="{{ asset('front-assets/footerImage/contactUs.png') }}" alt="" />Contact Us</a></li>                        
+                        <li><a href="{{ route('privacy') }}" title="Privacy"><img class="footerIcon" src="{{ asset('front-assets/footerImage/Privacy.png') }}" alt="" />Privacy</a></li>
+                        <li><a href="{{ route('termsConditions') }}" title="Terms & Conditions"><img class="footerIcon" src="{{ asset('front-assets/footerImage/Tnc.png') }}" alt="" />Terms & Conditions</a></li>
+                        <li><a href="{{ route('refundPolicy') }}" title="Refund Policy"><img class="footerIcon" src="{{ asset('front-assets/footerImage/refundPolicy.png') }}" alt="" />Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="footer-card">
+                    <h3>My Account</h3>
+                    <ul class="footer-links">
+                        <li><a href="{{ route('account.login') }}" title="Login"><img class="footerIcon" src="{{ asset('front-assets/footerImage/Login.png') }}" alt="" />Login</a></li>
+                        <li><a href="{{ route('account.register') }}" title="Register"><img class="footerIcon" src="{{ asset('front-assets/footerImage/Register.png') }}" alt="" />Register</a></li>
+                        <li><a href="{{ route('account.orders') }}" title="My Orders"><img class="footerIcon" src="{{ asset('front-assets/footerImage/myOrder.png') }}" alt="" />My Orders</a></li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="copy-right text-center">
+                        <p>Copyright © 2024 shauryaConstruction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
+
+
 
 
 <script src="{{ asset('front-assets/js/jquery-3.6.0.min.js') }}"></script>
@@ -185,6 +226,17 @@
 <script src="{{ asset('front-assets/js/lazyload.17.6.0.min.js') }}"></script>
 <script src="{{ asset('front-assets/js/slick.min.js') }}"></script>
 <script src="{{ asset('front-assets/js/ion.rangeSlider.min.js') }}"></script>
+
+<!-- Summernote JS -->
+<script src="{{ asset('admin-assets/plugins/summernote/summernote.min.js') }}"></script>
+<!-- Dropzone JS -->
+<script src="{{ asset('admin-assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
+<!-- Select2 JS -->
+<script src="{{ asset('admin-assets/plugins/select2/js/select2.min.js') }}"></script>
+
+<!-- Date time picker JS -->
+<script src="{{ asset('admin-assets/js/datetimepicker.js') }}"></script>
+
 <script src="{{ asset('front-assets/js/custom.js') }}"></script>
 <script>
 window.onscroll = function() {myFunction()};
@@ -204,6 +256,12 @@ $.ajaxSetup({
 	headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	}
+});
+
+$(document).ready(function() {
+	$(".summernote").summernote({
+		height:250
+	});
 });
 
 function addToCart(id) {

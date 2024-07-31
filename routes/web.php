@@ -59,6 +59,17 @@ Route::post('/apply-discount', [CartController::class, 'applyDiscount'])->name('
 Route::post('/remove-discount', [CartController::class, 'removeCoupon'])->name('front.removeCoupon');
 
 
+
+
+Route::get('about', [FrontController::class, 'about'])->name('about');
+Route::get('contact', [FrontController::class, 'contact'])->name('contact');
+Route::post('contact', [FrontController::class, 'contactUpdate'])->name('contactUpdate');
+Route::get('privacy', [FrontController::class, 'privacy'])->name('privacy');
+Route::get('termsConditions', [FrontController::class, 'termsConditions'])->name('termsConditions');
+Route::get('refundPolicy', [FrontController::class, 'refundPolicy'])->name('refundPolicy');
+
+
+
 Route::group(['prefix' => 'account'],function(){
     Route::group(['middleware' => 'guest'],function(){
         Route::get('/register', [AuthController::class, 'register'])->name('account.register');
